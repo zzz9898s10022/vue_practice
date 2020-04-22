@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 400px;
+            background-color: lightblue;
+        }
+        .total{
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <section>
+            <div class="container total">
+                <img width="100%" src="/jpg/fish_logo.jpg" alt="">
+                <div class="title">
+                    <div class="input total">
+                        姓名：{{name}},
+                        性別：{{sex}},
+                        年齡： {{age}} 歲,
+                        {{hobby.length? '喜歡':''}} {{hobby.join('、')}},
+                        {{member? '已':'未'}}成為會員頻道
+                    </div>
+                    <div class="menu">
+                        <div class="title">
+                            姓名:
+                        </div>
+                        <input v-model="name">
+                        <div class="title">
+                            性別:
+                        </div>
+                        <td>
+                            <input type="radio" value="女" v-model="sex">女
+                            <input type="radio" value="男" v-model="sex">男
+                        </td>
+                        <td>
+                            <div class="title">
+                                年齡:
+                            </div>
+                        </td>
+                        <select v-model="age">
+                            <option>低於 11</option>
+                            <option>11~20</option>
+                            <option>21~30</option>
+                            <option>超過 30</option>
+                        </select>
+                        <tr>
+                            <td>
+                                <div class="title">興趣:</div>
+                            </td>
+                            <td>
+                                <input type="checkbox" value="游泳" v-model="hobby">游泳
+                                <input type="checkbox" value="跑步" v-model="hobby">跑步
+                                <input type="checkbox" value="打球" v-model="hobby">打球
+                            </td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td class="title">
+                                會員:
+                            </td>
+                            <td><input type="checkbox" v-model="member">加入</td>
+                        </tr>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js'></script>
+    <script>
+
+    </script>
+    <script src="day5.js"></script>
+</body>
+
+</html>

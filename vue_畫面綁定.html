@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        main {
+            display: block;
+            display: flex;
+            justify-content: center;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .description {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="app">
+            <section>
+                <div class="container">
+                    <div class="title">
+                        <img :src="src" alt="#" class="logo">
+                        <h1>{{title}}</h1>
+                        <div class="description">
+                            <a v-if='index != 0' href="#" @click='changeIndex(-1)'>◀</a>
+                            <!-- <span class="type">{{menu[index].type}}</span> -->
+                            <span class="title">{{menu[index].title}}</span>
+                            <a v-if='index < menu.length-1' href="#" @click='changeIndex(1)'>▶</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js'></script>
+    <script>
+        let data = {
+            src: './jpg/fish_logo.jpg',
+            title: '手牽手，一起吃全家桶',
+            index: 0,
+            menu: [
+                { type: '1', title: '這是第一頁' },
+                { type: '2', title: '這是第二頁' },
+                { type: '3', title: '這是第三頁' },
+                { type: '4', title: '這是第四頁' },
+                { type: '5', title: '這是第五頁' },
+                { type: '6', title: '這是第六頁' },
+                { type: '7', title: '這是第七頁' },
+                { type: '8', title: '這是第八頁' },
+                { type: '9', title: '這是第九頁' },
+            ]
+        }
+        let vm = new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                changeIndex(change) {
+                    this.index = (this.index + change + this.menu.length) % this.menu.length
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
