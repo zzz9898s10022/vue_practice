@@ -17,7 +17,8 @@
             width: 400px;
             background-color: lightblue;
         }
-        .total{
+
+        .total {
             padding: 15px;
         }
     </style>
@@ -33,7 +34,7 @@
                         姓名：{{name}},
                         性別：{{sex}},
                         年齡： {{age}} 歲,
-                        {{hobby.length? '喜歡':''}} {{hobby.join('、')}},
+                        {{hobby.length? '喜歡':''}} {{hobby.join('、')}}{{hobby.length ? ",":""}}
                         {{member? '已':'未'}}成為會員頻道
                     </div>
                     <div class="menu">
@@ -85,7 +86,7 @@
     <script>
 
     </script>
-    <script src="day5.js"></script>
+    <script src="./js/day5.js"></script>
 </body>
 
 </html>

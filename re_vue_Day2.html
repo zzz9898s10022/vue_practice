@@ -9,8 +9,10 @@
 
 <body>
     <div id="app">
-        {{msg}}
-        {{aaa}}
+        <p>{{msg}}</p>
+        <p>{{html}}213123</p>
+        <p v-text="html">123123</p>
+        <p v-html="html">123123</p>
     </div>
 
 
@@ -18,14 +20,22 @@
     <script>
 
         let data = {
-            msg: 'Hello Vue'+ '1:09:36',
-        
+            msg: 'Hello Vue',
+            html: 'Using mustaches:<span style="color:red">this should be red.</span>',
         }
 
 
         let vm = new Vue({
             el: '#app',
             data: data,
+            created: function () {
+                console.log(this)
+            },
+            // created: () => {
+            //     console.log(this)
+            // },
+
+
         })
 
     </script>

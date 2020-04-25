@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <section>
+            <div class="container">
+                <div class="title">
+                    <div class="input" style="font-size:0">
+                        <select v-model="input.type">
+                            <option>主廚的話</option>
+                            <option>餐具擺盤</option>
+                            <option>開胃餐點</option>
+                            <option>風味沙拉</option>
+                            <option>總匯拼盤</option>
+                            <option>用餐插曲</option>
+                            <option>主廚推薦</option>
+                        </select>
+                        <input type="text" v-model="input.title" @keyup.enter="inputHandler">
+                    </div>
+                    <div class="menu">
+                        <div class="menuItem" v-for='(item,index) in menu'>
+                            <span class="number">{{index+1}}</span>
+                            <span class="type">{{item.type}}</span>
+                            <a href="#" target="vue-iron" class="title">{{item.title}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'></script>
+    <script>
+        let data = {
+            input: {
+                type: '主廚的話',
+                title: ''
+            },
+            menu: [
+                { type: '主廚的話', title: '餐點簡介與相關說明01' },
+                { type: '主廚的話', title: '餐點簡介與相關說明02' },
+                { type: '餐具擺盤', title: '餐點簡介與相關說明03' },
+                { type: '餐具擺盤', title: '餐點簡介與相關說明04' },
+                { type: '開胃餐點', title: '餐點簡介與相關說明05' },
+                { type: '開胃餐點', title: '餐點簡介與相關說明06' },
+                { type: '風味沙拉', title: '餐點簡介與相關說明07' },
+                { type: '風味沙拉', title: '餐點簡介與相關說明08' },
+                { type: '總匯拼盤', title: '餐點簡介與相關說明09' },
+                { type: '總匯拼盤', title: '餐點簡介與相關說明10' },
+                { type: '用餐插曲', title: '餐點簡介與相關說明11' },
+                { type: '用餐插曲', title: '餐點簡介與相關說明12' },
+                { type: '主廚推薦', title: '餐點簡介與相關說明13' },
+                { type: '主廚推薦', title: '餐點簡介與相關說明14' }
+            ]
+        }
+        new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                inputHandler() {
+                    if (this.input.title) {
+                        this.menu.push({
+                            type: this.input.type,
+                            title: this.input.title
+                        })
+                        this.input.title=''
+                        // 作用：讓輸入欄裡面的字清掉
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
