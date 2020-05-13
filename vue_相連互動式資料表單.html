@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20% 5%;
+            display: flex;
+            justify-content: center;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #app {
+            width: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <section>
+            <div class="container">
+                <div class="title">
+                    <div class="input" style="font-size:0">
+                        <select v-model="input.type">
+                            <option :value="null">請選擇</option>
+                            <option v-for="item in typeList.sort">{{item}}</option>
+                        </select>
+                        <select v-model="input.title">
+                            <option :value="null">請選擇</option>
+                            <option v-for="item in titleList.sort">{{item}}</option>
+
+                        </select>
+                        <!-- <input type="text" v-model.trim="input.title" @keyup.enter="inputHandler"> -->
+                    </div>
+                    <div v-if="content" class="menu">
+                        <div class="menuItem" v-for='(item,index) in titleMenu'>
+                            <span class="number">{{index+1}}</span>
+                            <span class="type">{{item.type}}</span>
+                            <a href="#" class="title">{{item.title}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'></script>
+    <script>
+        let data = {
+            input: {
+                type: null,
+                title: null
+            },
+            menu: [
+                { type: '主廚的話', title: '餐點簡介與相關說明01' },
+                { type: '主廚的話', title: '餐點簡介與相關說明02' },
+                { type: '餐具擺盤', title: '餐點簡介與相關說明03' },
+                { type: '餐具擺盤', title: '餐點簡介與相關說明04' },
+                { type: '開胃餐點', title: '餐點簡介與相關說明05' },
+                { type: '開胃餐點', title: '餐點簡介與相關說明06' },
+                { type: '風味沙拉', title: '餐點簡介與相關說明07' },
+                { type: '風味沙拉', title: '餐點簡介與相關說明08' },
+                { type: '總匯拼盤', title: '餐點簡介與相關說明09' },
+                { type: '總匯拼盤', title: '餐點簡介與相關說明10' },
+                { type: '用餐插曲', title: '餐點簡介與相關說明11' },
+                { type: '用餐插曲', title: '餐點簡介與相關說明12' },
+                { type: '主廚推薦', title: '餐點簡介與相關說明13' },
+                { type: '主廚推薦', title: '餐點簡介與相關說明14' }
+            ],
+
+        }
+        new Vue({
+            el: '#app',
+            data: data,
+            computed: {
+                typeList() {
+                    let obj = {
+                        sort: [],
+                        map: {}
+                    }
+                    this.menu.forEach(({ type, title }, index) => {
+                        if (!obj.map[type]) {
+                            obj.sort.push(type)
+                            obj.map[type] = {
+                                sort: [],
+                                map: {}
+                            }
+                            obj.map[type].sort.push(title)
+                            obj.map[type].map[title] = { index }
+                        }
+                    });
+                    return obj
+                },
+                titleList() {
+                    this.input.title = null
+                    if (this.input.type) {
+                        return this.typeList.map[this.input.type]
+                    } else {
+                        return []
+                    }
+                },
+                content() {
+                    if (this.input.title) {
+                        return this.titleList.map[this.input.title]
+                    } else {
+                        return null
+                    }
+                },
+                typeMenu() {
+                    if (this.input.type !== '全部') {
+                        return this.menu.filter(item => {
+                            return item.type === this.input.type
+                        })
+                    } else {
+                        return this.menu
+                    }
+                },
+                titleMenu() {
+                    if (this.input.title) {
+
+                        return this.typeMenu.filter(item => {
+                            return item.title.toLowerCase().indexOf(this.input.title.toLowerCase()) !== -1
+                        })
+                    } else {
+                        return this.typeMenu
+                    }
+                }
+
+            },
+            methods: {
+                inputHandler() {
+                    if (this.input.title) {
+                        this.menu.push({
+                            type: this.input.type,
+                            title: this.input.title
+                        })
+                        this.input.title = ''
+                        // 作用：讓輸入欄裡面的字清掉
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
