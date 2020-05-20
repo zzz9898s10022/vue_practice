@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <input type="text" v-model="text" />
+      <textarea type="text"></textarea>
+      <hr />
+      <p><input type="checkbox" v-model="edm" />訂閱edm</p>
+      <div>
+        <div>
+          <p><input type="radio" value="0" /></p>
+          <p><input type="radio" value="1" /></p>
+        </div>
+        <select >
+            <option >A</option>
+            <option >B</option>
+            <option >C</option>
+        </select>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          text: " Alex OtakuWhat",
+          edm: true,
+          checkList:['A','B','C']
+          check:[],
+        },
+      });
+    </script>
+  </body>
+</html>
